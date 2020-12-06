@@ -1,4 +1,4 @@
-# ueb4-docker-demo
+# ueb6-docker-demo
 Simpler REST-Service in Java + Spring Boot, um die Nutzung von Docker zu demonstrieren
 
 ## Inhalt
