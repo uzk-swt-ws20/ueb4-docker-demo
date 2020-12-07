@@ -2,15 +2,16 @@ package de.unikoeln.dockerdemo;
 
 import de.unikoeln.dockerdemo.entity.UserProfile;
 import de.unikoeln.dockerdemo.repo.UserRepository;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@Slf4j
 public class DockerDemoApplication {
+
+	private static final Logger log = org.slf4j.LoggerFactory.getLogger(DockerDemoApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(DockerDemoApplication.class, args);
