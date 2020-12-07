@@ -1,0 +1,36 @@
+version: '3.7'
+
+# BONUS: Die Daten der PostgreSQL-Datenbank werden in diesem "Volume" abgelegt,
+# das prinzipiell unabhängig von den Containern ist. Dies erlaubt das Austauschen des
+# DB-Containers, ohne dass die Daten verloren gehen.
+volumes:
+  postgres:
+
+services:
+  web:
+    build: .
+    command: java -jar /app.jar
+    environment:
+      # Verwende das korrekte Profil für Datenbankzugriffe
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    container_name: demo-postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      # Daten im Mountpoint des Volumes ablegen
+      - PGDATA=/data/postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      # Mountpoint definieren
+      - postgres:/data/postgres
+    ports:
+      - "15432:5432"
+    restart: unless-stopped
