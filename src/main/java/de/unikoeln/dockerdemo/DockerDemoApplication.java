@@ -21,12 +21,16 @@ public class DockerDemoApplication {
 	CommandLineRunner initDatabase(UserRepository repository) {
 
 		return args -> {
-			log.info("Preloading " + repository.save(
-					new UserProfile("Max Mustermann", "max@mustermann.de",
-							true, false)));
-			log.info("Preloading " + repository.save(
-					new UserProfile("Anton Schlömer", "aschloe5@smail.uni-koeln.de",
-							true, true)));
+			if (repository.count() == 0) {
+				log.info("Preloading " + repository.save(
+						new UserProfile("Max Mustermann", "max@mustermann.de",
+								true, false)));
+				log.info("Preloading " + repository.save(
+						new UserProfile("Anton Schlömer", "aschloe5@smail.uni-koeln.de",
+								true, true)));
+			} else {
+				log.info("Database found with content already present, skipped preloading.");
+			}
 		};
 	}
 }
