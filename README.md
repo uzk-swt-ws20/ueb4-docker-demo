@@ -19,14 +19,17 @@ Falls dennoch Interesse an den hier verwendeten Konzepten aufkommt, stehe ich na
 1. `./mvnw install` weist das Maven-Buildsystem an, alle nötigen Abhängigkeiten herunterzuladen
    und das Programm zu kompilieren.  
    Das Ergebnis ist eine JAR-Datei in `./target`.
-2. `docker build -t ueb4-docker-demo .` erstellt ein neues Docker-Image aus dem aktuellen Ordner (`.`),  
-   mit dem Namen `ueb4-docker-demo`.
-3. `docker run -p 8080:8080 ueb4-docker-demo` erzeugt einen neuen Container, der das gerade erstellte
+2. `docker build -t ueb6-docker-demo .` erstellt ein neues Docker-Image aus dem aktuellen Ordner (`.`),  
+   mit dem Namen `ueb6-docker-demo`.
+3. `docker run -p 8080:8080 --name ueb6-docker-demo_container ueb6-docker-demo` erzeugt einen neuen Container, der das gerade erstellte
    Image abbildet, und führt ihn aus.  
-   Zu beachten ist `-p 8080:8080`: Dieses Flag weist Docker an, den Netzwerkport 8080 der echten Maschine auf den
-   Netzwerkport 8080 des Containers zu mappen; nur so kann unsere Java-App weiterhin auf Netzwerkanfragen reagieren.
+   - Zu beachten ist `-p 8080:8080`: Dieses Flag weist Docker an, den Netzwerkport 8080 der echten Maschine auf den
+     Netzwerkport 8080 des Containers zu mappen; nur so kann unsere Java-App weiterhin auf Netzwerkanfragen reagieren.
+   - Auch interessant ist `--name ueb6-docker-demo_1`: Wird dies weggelassen, sucht Docker zufällig einen
+     recht albernen Namen für den Container aus (sowas wie `freaky_franklin` oder `philantrope_gecko`; probiert das gerne auch aus!).
+     Auch wenn der Containername fast immer egal ist, macht es in einer "ernsten" Arbeitsumgebung doch Sinn ihn explizit festzulegen.
 4. Beachte auch, dass der Realport nicht mit dem Container-Port übereinstimmen muss: Parallel zum laufenden Container
-   kann man mit `docker run -p 420:8080 ueb4-docker-demo` einen äquivalenten Container erstellen, der aber auf
+   kann man mit `docker run -p 420:8080 ueb6-docker-demo` einen äquivalenten Container erstellen, der aber auf
    Anfragen an Port 420 hört. Docker ermöglicht solch dynamisches Mapping, ohne den Programmcode ändern zu müssen.
 
 ## Multi-Container-Deployment
