@@ -9,6 +9,7 @@ volumes:
 services:
   web:
     build: .
+    image: ueb6-docker-demo
     command: java -jar /app.jar
     environment:
       # Verwende das korrekte Profil für Datenbankzugriffe
@@ -31,6 +32,8 @@ services:
     volumes:
       # Mountpoint definieren
       - postgres:/data/postgres
+    # Der Knoten bezieht sich tatsächlich nur auf Ports der Host-Maschine, ist für
+    # Networking im Compose-Cluster also irrelevant.
     ports:
       - "15432:5432"
     restart: unless-stopped
